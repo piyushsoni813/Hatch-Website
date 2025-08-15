@@ -18,7 +18,7 @@ const navbar = document.getElementById("mainNavbar");
   });
 
 const canvas = document.getElementById("paper");
-const ctx = canvas.getContext("2d");
+const ctx = canvas.getContext("3d");
 const orbitImages = Array.from(document.querySelectorAll(".orbit-img"));
 
 /* Layout knobs */
@@ -41,7 +41,7 @@ const RATIOS = [
   [3,5],  // 4:5
   [7,7],  // 9:7
   [4,6],  // 4:6
-  [9,8]  // 10:9
+  [7,8]  // 10:9
 ];
 
 let W = 0, H = 0, DPR = 1;
