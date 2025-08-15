@@ -1,0 +1,433 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Hatch - Build. Learn. Grow. Together.</title>
+
+    <!-- Tailwind v4 Play CDN (must load first) -->
+    <script src="https://cdn.tailwindcss.com"></script> <!-- Play CDN for dev; simple sites can use it[2] -->
+
+    <!-- daisyUI v5 core CSS (works with Tailwind v4) -->
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" /> <!-- daisyUI CDN[6] -->
+
+    <!-- Optional: built-in themes pack (enables many named themes) -->
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5/themes.css" rel="stylesheet" type="text/css" /> <!-- themes.css[6][9] -->
+
+    <!-- If you need local CSS or JS, keep them after framework CSS and defer JS -->
+    <link href="./style.css" rel="stylesheet" />
+    <script src="./script.js" defer></script>
+    <style>
+      /* Canvas sits behind hero content */
+#paper {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Orbiting avatars */
+#orbit-container {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1; /* above canvas, below text/buttons */
+}
+
+.orbit-img {
+  position: absolute;
+  width: 64px;
+  height: 64px;
+  border-radius: 9999px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(140,145,245,0.25), 0 0 0 1px rgba(140,145,245,0.25) inset;
+  transform: translateZ(0);
+}
+
+.orbit-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Optional: smaller on narrow screens */
+@media (max-width: 768px) {
+  .orbit-img { width: 44px; height: 44px; }
+}
+
+.glass-nav {
+  background-color: rgba(15, 23, 42, 0.5); /* dark with opacity */
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+    </style>
+  </head>
+  <body class="bg-black">
+
+    <!-- Navbar -->
+    <div id="mainNavbar" class="navbar px-16 bg-black backdrop-blur-lg sticky top-0 z-50 border-b border-gray-800/50 transition-all duration-300">
+      <div class="navbar-start">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 32" fill="none" class="transition-transform hover:scale-105">
+          <path d="M11.8565 0C5.03318 0.738833 1.24189 10.7735 0.203423 15.6649H4.78656C6.62596 7.95648 10.3842 4.65361 11.8565 4.65361C15.006 4.65361 18.2365 12.5571 18.9678 15.6649H23.6086C20.7277 3.39138 14.3826 -2.80119e-06 11.8565 0Z" fill="url(#paint0_linear_23_1027)"/>
+          <path d="M11.8342 31.3464C2.06626 30.8269 -0.121831 22.8004 0.00511734 18.8521H4.46853C4.59801 25.7009 8.26777 26.7998 11.8342 26.7998C18.0654 26.7998 19.4181 21.6092 19.3492 18.8521H23.794C23.593 28.9459 15.7371 31.3874 11.8342 31.3464Z" fill="url(#paint1_linear_23_1027)"/>
+          <defs>
+            <linearGradient id="paint0_linear_23_1027" x1="11.906" y1="15.6649" x2="11.906" y2="0" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#EA9CB0"/>
+              <stop offset="1" stop-color="#F9C32F"/>
+            </linearGradient>
+            <linearGradient id="paint1_linear_23_1027" x1="11.897" y1="31.3469" x2="11.897" y2="18.8521" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#813AFB"/>
+              <stop offset="1" stop-color="#8A90F4"/>
+            </linearGradient>
+          </defs>
+        </svg>
+        <a class="text-xl font-semibold ml-2 text-white hover:text-[#EA9CB0] transition-colors">Hatch</a>
+      </div>
+      <div class="navbar-end">
+        <a class="btn rounded-full text-[#9eb1ff] bg-[#0d193d] hover:bg-[#0f1e47] hover:scale-105 transition-all duration-200 border border-[#1a2d5c]/50">Join WhatsApp Community</a>
+      </div>
+    </div>
+
+    <!-- Hero -->
+    <section class="relative overflow-hidden">
+      <div class="ml-16 mt-16 m-2">
+        <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 32" fill="none" class="animate-pulse">
+          <path d="M11.8565 0C5.03318 0.738833 1.24189 10.7735 0.203423 15.6649H4.78656C6.62596 7.95648 10.3842 4.65361 11.8565 4.65361C15.006 4.65361 18.2365 12.5571 18.9678 15.6649H23.6086C20.7277 3.39138 14.3826 -2.80119e-06 11.8565 0Z" fill="url(#paint0_linear_23_1027)"/>
+          <path d="M11.8342 31.3464C2.06626 30.8269 -0.121831 22.8004 0.00511734 18.8521H4.46853C4.59801 25.7009 8.26777 26.7998 11.8342 26.7998C18.0654 26.7998 19.4181 21.6092 19.3492 18.8521H23.794C23.593 28.9459 15.7371 31.3874 11.8342 31.3464Z" fill="url(#paint1_linear_23_1027)"/>
+          <defs>
+            <linearGradient id="paint0_linear_23_1027" x1="11.906" y1="15.6649" x2="11.906" y2="0" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#EA9CB0"/>
+              <stop offset="1" stop-color="#F9C32F"/>
+            </linearGradient>
+            <linearGradient id="paint1_linear_23_1027" x1="11.897" y1="31.3469" x2="11.897" y2="18.8521" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#813AFB"/>
+              <stop offset="1" stop-color="#8A90F4"/>
+            </linearGradient>
+          </defs>
+        </svg>
+      </div>
+
+      <h1 class="text-5xl font-bold ml-16 mt-8 text-white leading-tight">
+        Build. Learn. Grow. <span class="text-[#8c91f5]">Together.</span>
+      </h1>
+
+      <p class="mt-4 ml-16 text-[#b1b5ba] text-lg leading-relaxed max-w-2xl">
+        Join the Hatch WhatsApp Community and take a part in events designed <br /> to help learn from experts, connect with peers, and grow faster.
+      </p>
+
+      <a class="btn btn-wide rounded-full text-[#9eb1ff] bg-[#0d193d] hover:bg-[#0f1e47] ml-16 mt-8 hover:scale-105 transition-all duration-200 border border-[#1a2d5c]/50 shadow-lg">
+        Join WhatsApp Community
+      </a>
+      <canvas id="paper"></canvas>
+
+  <!-- 8 orbiting images -->
+  <div id="orbit-container">
+    <div class="orbit-img"><img src="https://randomuser.me/api/portraits/men/1.jpg" /></div>
+    <div class="orbit-img"><img src="https://randomuser.me/api/portraits/women/2.jpg" /></div>
+    <div class="orbit-img"><img src="https://randomuser.me/api/portraits/men/3.jpg" /></div>
+    <div class="orbit-img"><img src="https://randomuser.me/api/portraits/women/4.jpg" /></div>
+    <div class="orbit-img"><img src="https://randomuser.me/api/portraits/men/5.jpg" /></div>
+    <div class="orbit-img"><img src="https://randomuser.me/api/portraits/women/6.jpg" /></div>
+    <div class="orbit-img"><img src="https://randomuser.me/api/portraits/men/7.jpg" /></div>
+    <div class="orbit-img"><img src="https://randomuser.me/api/portraits/women/8.jpg" /></div>
+  </div>
+    </section>
+
+    <!-- Events -->
+    <section class="bg-black text-white py-20 relative">
+      <div class="ml-16 mt-16 mx-auto">
+        <div class="flex justify-between items-center mb-12">
+          <div class="flex flex-col gap-3">
+            <h2 class="text-4xl font-bold leading-[70px] text-white max-w-[846px]">
+              Upcoming Events
+            </h2>
+            <p class="text-gray-400 leading-7 max-w-[665px] text-lg">
+              Workshops, talks, and interactive sessions designed to help gain real-world skills and connect with inspiring people.
+            </p>
+          </div>
+
+          <div class="flex items-center gap-4 mr-16">
+            <button class="w-14 h-14 bg-gray-800/70 hover:bg-gray-700 rounded-xl flex items-center justify-center transition-all duration-300 hover:scale-110 border border-gray-700/50" aria-label="Previous">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+            <button class="w-14 h-14 bg-gray-800/70 hover:bg-gray-700 rounded-xl flex items-center justify-center transition-all duration-300 hover:scale-110 border border-gray-700/50" aria-label="Next">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Cards -->
+      <div class="h-fill flex gap-12 px-16 pb-4">
+        <!-- Card 1 -->
+        <article class="p-6 bg-base-300 bg-gradient-to-br from-gray-900 to-gray-800 rounded-2xl border border-gray-700/50 flex flex-col gap-6 overflow-hidden max-w-[400px]">
+          <img class="w-full h-96 rounded-xl object-cover" src="../test.jpg" alt="Event image" />
+          <div class="flex flex-col gap-3">
+            <div class="text-[#9eb1ff] text-sm font-medium">Date & time</div>
+            <h3 class="text-white text-xl font-semibold leading-7">Will AI replace Product Designing?</h3>
+            <p class="text-gray-300 text-sm leading-relaxed">
+              Brief one-line value statement. Find your people. Explore focused spaces built around shared interests, where meaningful conversations, learning, and collaboration thrive.
+            </p>
+          </div>
+          <div class="flex gap-3">
+            <button class="flex-1 h-12 px-6 bg-[#1d2a4f] hover:bg-[#333f60] rounded-full flex justify-center items-center text-gray-300 text-sm font-medium transition-colors duration-200 border border-gray-600/30">
+              View Event
+            </button>
+            <button class="flex-1 h-12 px-6 bg-[#2F62FF] rounded-full flex justify-center items-center text-white text-sm font-medium transition-colors duration-200 shadow-lg">
+              Register
+            </button>
+          </div>
+        </article>
+
+        <!-- Card 2 -->
+        <article class="p-6 bg-base-300 bg-gradient-to-br from-gray-900 to-gray-800 rounded-2xl border border-gray-700/50 flex flex-col gap-6 overflow-hidden max-w-[400px]">
+          <img class="w-full h-96 rounded-xl object-cover" src="../test.jpg" alt="Event image" />
+          <div class="flex flex-col gap-3">
+            <div class="text-[#9eb1ff] text-sm font-medium">Date & time</div>
+            <h3 class="text-white text-xl font-semibold leading-7">Event title Event title Event title</h3>
+            <p class="text-gray-300 text-sm leading-relaxed">
+              Brief one-line value statement. Find your people. Explore focused spaces built around shared interests, where meaningful conversations, learning, and collaboration thrive.
+            </p>
+          </div>
+          <div class="flex gap-3">
+            <button class="flex-1 h-12 px-6 bg-[#1d2a4f] hover:bg-[#333f60] rounded-full flex justify-center items-center text-gray-300 text-sm font-medium transition-colors duration-200 border border-gray-600/30">
+              View Event
+            </button>
+            <button class="flex-1 h-12 px-6 bg-[#2F62FF] rounded-full flex justify-center items-center text-white text-sm font-medium transition-colors duration-200 shadow-lg">
+              Register
+            </button>
+          </div>
+        </article>
+
+        <!-- Card 3 -->
+        <article class="p-6 bg-base-300 bg-gradient-to-br from-gray-900 to-gray-800 rounded-2xl border border-gray-700/50 flex flex-col gap-6 overflow-hidden max-w-[400px]">
+          <img class="w-full h-96 rounded-xl object-cover" src="../test.jpg" alt="Event image" />
+          <div class="flex flex-col gap-3">
+            <div class="text-[#9eb1ff] text-sm font-medium">Date & time</div>
+            <h3 class="text-white text-xl font-semibold leading-7">Event title</h3>
+            <p class="text-gray-300 text-sm leading-relaxed">
+              Brief one-line value statement. Find your people. Explore focused spaces built around shared interests, where meaningful conversations, learning, and collaboration thrive.
+            </p>
+          </div>
+          <div class="flex gap-3">
+            <button class="flex-1 h-12 px-6 bg-[#1d2a4f] hover:bg-[#333f60] rounded-full flex justify-center items-center text-gray-300 text-sm font-medium transition-colors duration-200 border border-gray-600/30">
+              View Event
+            </button>
+            <button class="flex-1 h-12 px-6 bg-[#2F62FF] rounded-full flex justify-center items-center text-white text-sm font-medium transition-colors duration-200 shadow-lg">
+              Register
+            </button>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Why Join -->
+    <section class="py-20 px-4 bg-black m-2">
+      <div class="container mx-auto max-w-6xl">
+        <div class="text-center mb-12">
+          <h2 class="text-4xl md:text-5xl font-bold text-white mb-6">Why Join Hatch Events?</h2>
+          <p class="text-gray-300 max-w-3xl mx-auto text-lg leading-relaxed">
+            Workshops, talks, and interactive sessions designed to help you gain real-world skills and connect with inspiring people.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 p-6">
+          <div class="rounded-2xl p-8 bg-gradient-to-br from-[#1a1a1a] to-[#2a2a2a] border border-gray-700/50 transition-all duration-300 hover:scale-105 group">
+            <div class="w-12 h-12 bg-gradient-to-r from-[#EA9CB0] to-[#F9C32F] rounded-xl mb-6 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M12 2L15.09 8.26L22 9L17 14L18.18 21L12 17.77L5.82 21L7 14L2 9L8.91 8.26L12 2Z" fill="white"/>
+              </svg>
+            </div>
+            <p class="text-white text-lg leading-relaxed font-medium">Learn from experts who've been there and done it.</p>
+          </div>
+
+          <div class="rounded-2xl p-8 bg-gradient-to-br from-[#1a1a1a] to-[#2a2a2a] border border-gray-700/50 transition-all duration-300 hover:scale-105 group">
+            <div class="w-12 h-12 bg-gradient-to-r from-[#813AFB] to-[#8A90F4] rounded-xl mb-6 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M16 4C18.175 4.01 20 5.84 20 8V16C20 18.21 18.21 20 16 20H8C5.79 20 4 18.21 4 16V8C4 5.84 5.825 4.01 8 4H16ZM8.5 9.5C7.67 9.5 7 10.17 7 11S7.67 12.5 8.5 12.5 10 11.83 10 11 9.33 9.5 8.5 9.5ZM15.5 9.5C14.67 9.5 14 10.17 14 11S14.67 12.5 15.5 12.5 17 11.83 17 11 16.33 9.5 15.5 9.5ZM8 15.5C8 16.33 8.67 17 9.5 17H14.5C15.33 17 16 16.33 16 15.5S15.33 14 14.5 14H9.5C8.67 14 8 14.67 8 15.5Z" fill="white"/>
+              </svg>
+            </div>
+            <p class="text-white text-lg leading-relaxed font-medium">Meet people who share your interests and goals.</p>
+          </div>
+
+          <div class="rounded-2xl p-8 bg-gradient-to-br from-[#1a1a1a] to-[#2a2a2a] border border-gray-700/50 transition-all duration-300 hover:scale-105 group">
+            <div class="w-12 h-12 bg-gradient-to-r from-blue-600 to-blue-500 rounded-xl mb-6 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M9 12L11 14L15 10M21 12C21 16.97 16.97 21 12 21C7.03 21 3 16.97 3 12C3 7.03 7.03 3 12 3C16.97 3 21 7.03 21 12Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <p class="text-white text-lg leading-relaxed font-medium">Discover ideas and tools you can apply right away.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About -->
+    <section class="w-full bg-[color:var(--Tokens-Colors-surface,_#0b0f19)/0.25]">
+      <div class="max-w-[1100px] mx-auto px-6 py-24 flex flex-col items-center gap-10">
+        <div class="w-full flex flex-col items-center gap-3 text-center">
+          <h2 class="text-6xl leading-[70px] font-semibold text-[color:var(--Tokens-Colors-Content,_#fff)]">About Hatch</h2>
+          <p class="max-w-[846.76px] text-xl leading-7 text-[color:var(--Colors-Neutral-Solid-11,_#a6adbb)]">
+            Hatch is where driven minds unite. Our communities spark a culture of collaboration, fuel innovation, and turn ideas into real impact, empowering people to build what makes a difference. At Hatch, ambition grows, evolves, and becomes something the world can see.
+          </p>
+        </div>
+
+        <div class="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          <!-- Card 1 -->
+          <article class="w-full max-w-[416px] h-[526px] relative rounded-xl overflow-hidden bg-gradient-to-b from-slate-950 to-indigo-800 outline outline-1 outline-offset-[-1px] outline-blue-400/30 mx-auto">
+            <img src="../img.png" alt="Portrait of Sophie Harrington" class="absolute inset-0 w-full h-full object-cover" loading="lazy" />
+            <div class="absolute inset-x-0 bottom-0 p-6 bg-gradient-to-b from-indigo-900/0 to-indigo-900">
+              <h3 class="text-white text-2xl sm:text-3xl font-semibold leading-snug text-center">Sophie Harrington</h3>
+              <p class="mt-1 text-white/90 text-base sm:text-lg leading-relaxed text-center">Chief Technology Strategist</p>
+              <a href="#" class="mt-4 mx-auto inline-flex items-center gap-2 h-9 px-3 rounded-full bg-white/10 outline outline-1 outline-blue-500/60 text-blue-100 text-sm font-medium hover:bg-white/15 transition" aria-label="Open LinkedIn profile of Sophie Harrington">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-4 h-4 text-sky-400" fill="currentColor" aria-hidden="true">
+                  <path d="M4.98 3.5C4.98 4.88 3.86 6 2.5 6S0 4.88 0 3.5s1.12-2.5 2.5-2.5 2.48 1.12 2.48 2.5zM.5 8h4v16h-4V8zm8 0h3.83v2.18h.05c.53-1 1.83-2.18 3.77-2.18 4.03 0 4.78 2.65 4.78 6.1V24h-4v-7.16c0-1.7-.03-3.89-2.37-3.89-2.37 0-2.73 1.85-2.73 3.77V24h-4V8z"/>
+                </svg>
+                <span>LinkedIn</span>
+              </a>
+            </div>
+          </article>
+
+          <!-- Card 2 -->
+          <article class="w-full max-w-[416px] h-[526px] relative rounded-xl overflow-hidden bg-gradient-to-b from-slate-950 to-indigo-800 outline outline-1 outline-offset-[-1px] outline-blue-400/30 mx-auto">
+            <img src="../img.png" alt="Portrait of Arjun Mehta" class="absolute inset-0 w-full h-full object-cover" loading="lazy" />
+            <div class="absolute inset-x-0 bottom-0 p-6 bg-gradient-to-b from-indigo-900/0 to-indigo-900">
+              <h3 class="text-white text-2xl sm:text-3xl font-semibold leading-snug text-center">Arjun Mehta</h3>
+              <p class="mt-1 text-white/90 text-base sm:text-lg leading-relaxed text-center">Chief Technology Strategist</p>
+              <a href="#" class="mt-4 mx-auto inline-flex items-center gap-2 h-9 px-3 rounded-full bg-white/10 outline outline-1 outline-blue-500/60 text-blue-100 text-sm font-medium hover:bg-white/15 transition" aria-label="Open LinkedIn profile of Arjun Mehta">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-4 h-4 text-sky-400" fill="currentColor" aria-hidden="true">
+                  <path d="M4.98 3.5C4.98 4.88 3.86 6 2.5 6S0 4.88 0 3.5s1.12-2.5 2.5-2.5 2.48 1.12 2.48 2.5zM.5 8h4v16h-4V8zm8 0h3.83v2.18h.05c.53-1 1.83-2.18 3.77-2.18 4.03 0 4.78 2.65 4.78 6.1V24h-4v-7.16c0-1.7-.03-3.89-2.37-3.89-2.37 0-2.73 1.85-2.73 3.77V24h-4V8z"/>
+                </svg>
+                <span>LinkedIn</span>
+              </a>
+            </div>
+          </article>
+
+          <!-- Card 3 -->
+          <article class="w-full max-w-[416px] h-[526px] relative rounded-xl overflow-hidden bg-gradient-to-b from-slate-950 to-indigo-800 outline outline-1 outline-offset-[-1px] outline-blue-400/30 mx-auto">
+            <img src="../img.png" alt="Portrait of Mira Shah" class="absolute inset-0 w-full h-full object-cover" loading="lazy" />
+            <div class="absolute inset-x-0 bottom-0 p-6 bg-gradient-to-b from-indigo-900/0 to-indigo-900">
+              <h3 class="text-white text-2xl sm:text-3xl font-semibold leading-snug text-center">Mira Shah</h3>
+              <p class="mt-1 text-white/90 text-base sm:text-lg leading-relaxed text-center">Chief Technology Strategist</p>
+              <a href="#" class="mt-4 mx-auto inline-flex items-center gap-2 h-9 px-3 rounded-full bg-white/10 outline outline-1 outline-blue-500/60 text-blue-100 text-sm font-medium hover:bg-white/15 transition" aria-label="Open LinkedIn profile of Mira Shah">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-4 h-4 text-sky-400" fill="currentColor" aria-hidden="true">
+                  <path d="M4.98 3.5C4.98 4.88 3.86 6 2.5 6S0 4.88 0 3.5s1.12-2.5 2.5-2.5 2.48 1.12 2.48 2.5zM.5 8h4v16h-4V8zm8 0h3.83v2.18h.05c.53-1 1.83-2.18 3.77-2.18 4.03 0 4.78 2.65 4.78 6.1V24h-4v-7.16c0-1.7-.03-3.89-2.37-3.89-2.37 0-2.73 1.85-2.73 3.77V24h-4V8z"/>
+                </svg>
+                <span>LinkedIn</span>
+              </a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+
+    <section class="pb-44">
+      <div class="container mx-auto max-w-6xl">
+        <div class="text-center mb-12">
+          <h2 class="text-4xl md:text-5xl font-semibold text-white mb-6">Backed by IDEAS (DSSE), IIT Bombay</h2>
+          <p class="text-gray-300 max-w-3xl mx-auto leading-relaxed">
+            Hatch is part of the IDEAS Program at the Desai Sethi School of Entrepreneurship (DSSE), IIT Bombay, a flagship pre-incubation initiative that helps early-stage ventures validate ideas, build prototypes, and gain market insights through structured mentorship, funding support, and access to a vibrant network of alumni and industry experts.
+          </p>
+          <a class="btn btn-wide rounded-full text-[#9eb1ff] bg-[#0d193d] hover:bg-[#0f1e47] ml-16 mt-8 hover:scale-105 transition-all duration-200 border border-[#1a2d5c]/50 shadow-lg">
+            Join WhatsApp Community
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer Section (Glass) -->
+<footer class="relative mt-20 overflow-visible">
+  <!-- Soft gradient backdrop for depth -->
+  <div class="absolute inset-0 bg-gradient-to-b from-transparent via-[#0b0f19]/40 to-black pointer-events-none"></div>
+
+  <!-- Glass container -->
+  <div class="relative mx-auto">
+    <div class="mt-[-24px] border border-white/10 bg-white/10 backdrop-blur shadow-[0_10px_40px_-10px_rgba(0,0,0,0.6)] overflow-visible">
+      <!-- Rotating disc: half above the footer, half inside -->
+      <div class="absolute left-1/2 top-0 -translate-x-1/2 -translate-y-1/2 pointer-events-none z-0 max-w-[720px]">
+        <img
+          src="../disc.png"
+          alt=""
+          class="w-full h-full object-contain select-none
+                 animate-[spin_24s_linear_infinite] [transform-origin:center]"
+        />
+      </div>
+
+      <div class="relative z-10 px-6 py-12 grid grid-cols-1 md:grid-cols-4 gap-8">
+        <!-- Brand -->
+        <div class="col-span-1 md:col-span-2">
+          <div class="flex items-center gap-2 mb-4">
+            <!-- Logo -->
+            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="none" viewBox="0 0 24 32" class="shrink-0">
+              <path d="M11.8565 0C5.03318 0.738833 1.24189 10.7735 0.203423 15.6649H4.78656C6.62596 7.95648 10.3842 4.65361 11.8565 4.65361C15.006 4.65361 18.2365 12.5571 18.9678 15.6649H23.6086C20.7277 3.39138 14.3826 -2.80119e-06 11.8565 0Z" fill="url(#footer_grad1)" />
+              <path d="M11.8342 31.3464C2.06626 30.8269 -0.121831 22.8004 0.00511734 18.8521H4.46853C4.59801 25.7009 8.26777 26.7998 11.8342 26.7998C18.0654 26.7998 19.4181 21.6092 19.3492 18.8521H23.794C23.593 28.9459 15.7371 31.3874 11.8342 31.3464Z" fill="url(#footer_grad2)" />
+              <defs>
+                <linearGradient id="footer_grad1" x1="11.9" y1="15.66" x2="11.9" y2="0" gradientUnits="userSpaceOnUse">
+                  <stop stop-color="#EA9CB0" />
+                  <stop offset="1" stop-color="#F9C32F" />
+                </linearGradient>
+                <linearGradient id="footer_grad2" x1="11.89" y1="31.34" x2="11.89" y2="18.85" gradientUnits="userSpaceOnUse">
+                  <stop stop-color="#813AFB" />
+                  <stop offset="1" stop-color="#8A90F4" />
+                </linearGradient>
+              </defs>
+            </svg>
+            <span class="text-xl font-semibold text-white">Hatch</span>
+          </div>
+          <p class="text-gray-300/80 max-w-sm leading-relaxed">
+            Build. Learn. Grow. Together. Join our community and take part in events designed to help connect, learn, and innovate.
+          </p>
+        </div>
+
+        <!-- Links -->
+        <div>
+          <h3 class="text-white font-semibold mb-4">Quick Links</h3>
+          <ul class="space-y-2 text-gray-300/80">
+            <li><a href="#" class="hover:text-white transition-colors">Upcoming Events</a></li>
+            <li><a href="#" class="hover:text-white transition-colors">About Us</a></li>
+            <li><a href="#" class="hover:text-white transition-colors">Join Community</a></li>
+          </ul>
+        </div>
+
+        <!-- Socials -->
+        <div>
+          <h3 class="text-white font-semibold mb-4">Connect</h3>
+          <div class="flex gap-2">
+            <a href="#" aria-label="Instagram" class="text-gray-300/80 hover:text-pink-400 transition-colors">
+              <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M7.75 2H16.25C19.1 2 21.25 4.15 21.25 7V16.25C21.25 19.1 19.1 21.25 16.25 21.25H7.75C4.9 21.25 2.75 19.1 2.75 16.25V7C2.75 4.15 4.9 2 7.75 2ZM12 7C9.52 7 7.5 9.02 7.5 11.5C7.5 13.98 9.52 16 12 16C14.48 16 16.5 13.98 16.5 11.5C16.5 9.02 14.48 7 12 7ZM18 6.5C17.45 6.5 17 6.95 17 7.5C17 8.05 17.45 8.5 18 8.5C18.55 8.5 19 8.05 19 7.5C19 6.95 18.55 6.5 18 6.5ZM12 9.5C13.38 9.5 14.5 10.62 14.5 12C14.5 13.38 13.38 14.5 12 14.5C10.62 14.5 9.5 13.38 9.5 12C9.5 10.62 10.62 9.5 12 9.5Z"/>
+              </svg>
+            </a>
+            <a href="#" aria-label="LinkedIn" class="text-gray-300/80 hover:text-sky-400 transition-colors">
+              <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M4.98 3.5C4.98 4.88 3.86 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM.5 8h4V24h-4V8zm8 0h3.83v2.18h.05c.53-1 1.83-2.18 3.77-2.18 4.03 0 4.78 2.65 4.78 6.1V24h-4v-7.16c0-1.7-.03-3.89-2.37-3.89-2.37 0-2.73 1.85-2.73 3.77V24h-4V8z"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom bar (glass line) -->
+      <div class="relative z-10 border-t border-white/10">
+        <div class="px-6 py-6 flex flex-col md:flex-row justify-between text-gray-400/80 text-sm">
+          <p>© 2025 Hatch. All rights reserved.</p>
+          <div class="mt-4 md:mt-0 space-x-4">
+            <a href="#" class="hover:text-gray-200">Privacy Policy</a>
+            <a href="#" class="hover:text-gray-200">Terms of Service</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</footer>
+
+
+  </body>
+</html>
