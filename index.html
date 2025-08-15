@@ -351,19 +351,22 @@
   <!-- Soft gradient backdrop for depth -->
   <div class="absolute inset-0 bg-gradient-to-b from-transparent via-[#0b0f19]/40 to-black pointer-events-none"></div>
 
-  <!-- Glass container -->
-  <div class="relative mx-auto">
-    <div class="mt-[-24px] border border-white/10 bg-white/10 backdrop-blur shadow-[0_10px_40px_-10px_rgba(0,0,0,0.6)] overflow-visible">
-      <!-- Rotating disc: half above the footer, half inside -->
-      <div class="absolute rounded-2xl left-1/2 z-[-1] top-0 -translate-x-1/2 -translate-y-1/2 pointer-events-none max-w-[720px]">
-        <img
-          src="../disc.png"
-          alt=""
-          class="sm:w-[420px] sm:h-[420px] w-full h-full select-none
-                 animate-[spin_24s_linear_infinite] [transform-origin:center]"
-        />
-      </div>
+  <!-- Rotating disc behind blur -->
+  <div class="absolute rounded-2xl left-1/2 top-0 -translate-x-1/2 -translate-y-1/2 
+              pointer-events-none max-w-[720px] z-0">
+    <img
+      src="../disc.png"
+      alt=""
+      class="sm:w-[420px] sm:h-[420px] w-full h-full select-none
+             animate-[spin_24s_linear_infinite] [transform-origin:center]"
+    />
+  </div>
 
+  <!-- Glass container -->
+  <div class="relative z-10 mx-auto">
+    <div class="mt-[-24px] border border-white/10 bg-black/30 backdrop-blur 
+                shadow-[0_10px_40px_-10px_rgba(0,0,0,0.6)] overflow-visible">
+      
       <div class="relative z-10 px-6 py-12 grid grid-cols-1 md:grid-cols-4 gap-8">
         <!-- Brand -->
         <div class="col-span-1 md:col-span-2">
@@ -404,11 +407,6 @@
         <div>
           <h3 class="text-white font-semibold mb-4">Connect</h3>
           <div class="flex gap-2">
-            <!-- <a href="#" aria-label="Instagram" class="text-gray-300/80 hover:text-pink-400 transition-colors">
-              <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M7.75 2H16.25C19.1 2 21.25 4.15 21.25 7V16.25C21.25 19.1 19.1 21.25 16.25 21.25H7.75C4.9 21.25 2.75 19.1 2.75 16.25V7C2.75 4.15 4.9 2 7.75 2ZM12 7C9.52 7 7.5 9.02 7.5 11.5C7.5 13.98 9.52 16 12 16C14.48 16 16.5 13.98 16.5 11.5C16.5 9.02 14.48 7 12 7ZM18 6.5C17.45 6.5 17 6.95 17 7.5C17 8.05 17.45 8.5 18 8.5C18.55 8.5 19 8.05 19 7.5C19 6.95 18.55 6.5 18 6.5ZM12 9.5C13.38 9.5 14.5 10.62 14.5 12C14.5 13.38 13.38 14.5 12 14.5C10.62 14.5 9.5 13.38 9.5 12C9.5 10.62 10.62 9.5 12 9.5Z"/>
-              </svg>
-            </a> -->
             <a href="https://www.linkedin.com/company/hatch-socialmedia/?viewAsMember=true" aria-label="LinkedIn" class="text-gray-300/80 hover:text-sky-400 transition-colors">
               <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M4.98 3.5C4.98 4.88 3.86 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM.5 8h4V24h-4V8zm8 0h3.83v2.18h.05c.53-1 1.83-2.18 3.77-2.18 4.03 0 4.78 2.65 4.78 6.1V24h-4v-7.16c0-1.7-.03-3.89-2.37-3.89-2.37 0-2.73 1.85-2.73 3.77V24h-4V8z"/>
@@ -418,7 +416,7 @@
         </div>
       </div>
 
-      <!-- Bottom bar (glass line) -->
+      <!-- Bottom bar -->
       <div class="relative z-10 border-t border-white/10">
         <div class="px-6 py-6 flex flex-col md:flex-row justify-between text-gray-400/80 text-sm">
           <p>© 2025 Hatch. All rights reserved.</p>
@@ -432,6 +430,7 @@
     </div>
   </div>
 </footer>
+
 
 
   </body>
