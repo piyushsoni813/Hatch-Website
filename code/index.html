@@ -66,7 +66,7 @@
   <body class="bg-black">
 
     <!-- Navbar -->
-    <div id="mainNavbar" class="navbar px-16 bg-black backdrop-blur-lg sticky top-0 z-50 border-b border-gray-800/50 transition-all duration-300">
+    <div id="mainNavbar" class="navbar px-4 sm:px-16 bg-black backdrop-blur-lg sticky top-0 z-50 border-b border-gray-800/50 transition-all duration-300 flex-wrap">
       <div class="navbar-start">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 32" fill="none" class="transition-transform hover:scale-105">
           <path d="M11.8565 0C5.03318 0.738833 1.24189 10.7735 0.203423 15.6649H4.78656C6.62596 7.95648 10.3842 4.65361 11.8565 4.65361C15.006 4.65361 18.2365 12.5571 18.9678 15.6649H23.6086C20.7277 3.39138 14.3826 -2.80119e-06 11.8565 0Z" fill="url(#paint0_linear_23_1027)"/>
@@ -84,7 +84,7 @@
         </svg>
         <a class="text-xl font-semibold ml-2 text-white hover:text-[#EA9CB0] transition-colors">Hatch</a>
       </div>
-      <div class="navbar-end">
+      <div class="navbar-end ">
         <a class="btn rounded-full text-[#9eb1ff] bg-[#0d193d] hover:bg-[#0f1e47] hover:scale-105 transition-all duration-200 border border-[#1a2d5c]/50">Join WhatsApp Community</a>
       </div>
     </div>
@@ -139,7 +139,7 @@
       <div class="ml-16 mt-16 mx-auto">
         <div class="flex justify-between items-center mb-12">
           <div class="flex flex-col gap-3">
-            <h2 class="text-4xl font-bold leading-[70px] text-white max-w-[846px]">
+            <h2 class="text-5xl font-semibold leading-[70px] text-white max-w-[846px]">
               Upcoming Events
             </h2>
             <p class="text-gray-400 leading-7 max-w-[665px] text-lg">
@@ -147,14 +147,14 @@
             </p>
           </div>
 
-          <div class="flex items-center gap-4 mr-16">
-            <button class="w-14 h-14 bg-gray-800/70 hover:bg-gray-700 rounded-xl flex items-center justify-center transition-all duration-300 hover:scale-110 border border-gray-700/50" aria-label="Previous">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <div class="hidden sm:flex items-center gap-4 mt-4 sm:mt-0 p-2 sm:p-12">
+            <button class="w-14 h-14 bg-gray-800/70 hover:bg-gray-700 rounded-xl flex items-center justify-center border border-gray-700/50">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
                 <path d="M15 18L9 12L15 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
             </button>
-            <button class="w-14 h-14 bg-gray-800/70 hover:bg-gray-700 rounded-xl flex items-center justify-center transition-all duration-300 hover:scale-110 border border-gray-700/50" aria-label="Next">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <button class="w-14 h-14 bg-gray-800/70 hover:bg-gray-700 rounded-xl flex items-center justify-center border border-gray-700/50">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
                 <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
               </svg>
             </button>
@@ -163,7 +163,7 @@
       </div>
 
       <!-- Cards -->
-      <div class="h-fill flex gap-12 px-16 pb-4">
+      <div class="h-fill grid grid-cols-1 sm:grid-cols-3 gap-8 px-4 sm:px-16">
         <!-- Card 1 -->
         <article class="p-6 bg-base-300 bg-gradient-to-br from-gray-900 to-gray-800 rounded-2xl border border-gray-700/50 flex flex-col gap-6 overflow-hidden max-w-[400px]">
           <img class="w-full h-96 rounded-xl object-cover" src="../test.jpg" alt="Event image" />
