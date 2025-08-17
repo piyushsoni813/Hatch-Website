@@ -35,13 +35,13 @@ const CONFIG = {
 /* Polyrhythm tempo ratios for each rail (speeds loop cleanly) */
 const RATIOS = [
   [1,1],  // 1:1
-  [2,3],  // 3:2
-  [1,3],  // 4:3
-  [2,4],  // 5:4
-  [3,5],  // 4:5
+  [3,2],  // 3:2
+  [4,3],  // 4:3
+  [5,4],  // 5:4
+  [4,5],  // 4:5
   [7,7],  // 9:7
   [4,6],  // 4:6
-  [9,8]  // 10:9
+  [12,8]  // 10:9
 ];
 
 let W = 0, H = 0, DPR = 1;
@@ -61,7 +61,7 @@ function resize() {
 
   // Place arcs on the right side like the screenshot
   center.x = W * 0.98;
-  center.y = H * 0.02;
+  center.y = H * -0.1;
 
   // Scale base radius with viewport, keep generous negative space
   baseRadius = Math.min(W, H) * 0.22;
