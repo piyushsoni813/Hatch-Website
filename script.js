@@ -41,7 +41,7 @@ const RATIOS = [
   [4,5],  // 4:5
   [7,7],  // 9:7
   [4,6],  // 4:6
-  [12,8]  // 10:9
+  [6,8]  // 10:9
 ];
 
 let W = 0, H = 0, DPR = 1;
@@ -162,3 +162,50 @@ function tick(now) {
   requestAnimationFrame(tick);
 }
 requestAnimationFrame(tick);
+
+
+
+
+// Get DOM elements
+const upcomingBtn = document.getElementById("upcomingBtn");
+const pastBtn = document.getElementById("pastBtn");
+const upcomingEvents = document.getElementById("upcomingEvents");
+const pastEvents = document.getElementById("pastEvents");
+
+// Reset both buttons
+function resetTabs() {
+  upcomingBtn.classList.remove("active-tab");
+  pastBtn.classList.remove("active-tab");
+  upcomingBtn.classList.add("text-gray-400");
+  pastBtn.classList.add("text-gray-400");
+}
+
+// Show Upcoming
+upcomingBtn.addEventListener("click", () => {
+  resetTabs();
+  upcomingBtn.classList.add("active-tab");
+  upcomingBtn.classList.remove("text-gray-400");
+
+  upcomingEvents.classList.remove("hidden");
+  pastEvents.classList.add("hidden");
+});
+
+// Show Past
+pastBtn.addEventListener("click", () => {
+  resetTabs();
+  pastBtn.classList.add("active-tab");
+  pastBtn.classList.remove("text-gray-400");
+
+  pastEvents.classList.remove("hidden");
+  upcomingEvents.classList.add("hidden");
+});
+
+// Default state = Upcoming visible
+document.addEventListener("DOMContentLoaded", () => {
+  resetTabs();
+  upcomingBtn.classList.add("active-tab");
+  upcomingBtn.classList.remove("text-gray-400");
+
+  upcomingEvents.classList.remove("hidden");
+  pastEvents.classList.add("hidden");
+});
