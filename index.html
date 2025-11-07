@@ -3,20 +3,86 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Hatch - Build. Learn. Grow. Together.</title>
+    <title>Hatch - Startup & Student Community | IIT Bombay Events & Learning</title>
 
-    <!-- Tailwind v4 Play CDN (must load first) -->
-    <script src="https://cdn.tailwindcss.com"></script> <!-- Play CDN for dev; simple sites can use it[2] -->
+    <!-- ✅ SEO Meta -->
+    <meta name="description" content="Join Hatch — IIT Bombay’s innovation and student community. Attend live startup events, workshops, and talks to build, learn, and grow together with India's top founders and creators.">
+    <meta name="keywords" content="Hatch, IIT Bombay, startup community, student entrepreneurship, India events, fintech, AI, data analytics, DSSE IITB, student founders, Mumbai startup network">
+    <meta name="author" content="Hatch Team">
+    <meta name="robots" content="index, follow">
 
-    <!-- daisyUI v5 core CSS (works with Tailwind v4) -->
-    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" /> <!-- daisyUI CDN[6] -->
+    <!-- ✅ GEO Targeting -->
+    <meta name="geo.region" content="IN-MH">
+    <meta name="geo.placename" content="Mumbai, Maharashtra">
+    <meta name="geo.position" content="19.0760;72.8777">
+    <meta name="ICBM" content="19.0760,72.8777">
+    <html lang="en-IN">
 
-    <!-- Optional: built-in themes pack (enables many named themes) -->
-    <link href="https://cdn.jsdelivr.net/npm/daisyui@5/themes.css" rel="stylesheet" type="text/css" /> <!-- themes.css[6][9] -->
+    <!-- ✅ Open Graph (Facebook / WhatsApp / LinkedIn Preview) -->
+    <meta property="og:title" content="Hatch - Build. Learn. Grow. Together.">
+    <meta property="og:description" content="India’s most vibrant IIT Bombay-backed student and startup community. Join Hatch to learn, collaborate, and grow through live events and workshops.">
+    <meta property="og:image" content="https://www.hatch.co.in/thumbnail.png">
+    <meta property="og:url" content="https://www.hatch.co.in/">
+    <meta property="og:type" content="website">
 
-    <!-- If you need local CSS or JS, keep them after framework CSS and defer JS -->
+    <!-- ✅ Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Hatch - Startup & Student Community | IIT Bombay Events & Learning">
+    <meta name="twitter:description" content="Join Hatch’s IIT Bombay community to collaborate, innovate, and grow through learning events across India.">
+    <meta name="twitter:image" content="https://www.hatch.co.in/thumbnail.png">
+
+    <!-- ✅ Canonical Link -->
+    <link rel="canonical" href="https://www.hatch.co.in/">
+
+    <!-- ✅ Favicon -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <!-- ✅ Tailwind & DaisyUI Frameworks -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5/themes.css" rel="stylesheet" type="text/css" />
+
+    <!-- ✅ Local Styles & Scripts -->
     <link href="./style.css" rel="stylesheet" />
     <script src="./script.js" defer></script>
+
+    <!-- ✅ Local Business + Educational Schema for Google -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "EducationalOrganization",
+      "name": "Hatch",
+      "url": "https://www.hatch.co.in",
+      "logo": "https://www.hatch.co.in/thumbnail.png",
+      "sameAs": [
+        "https://www.linkedin.com/company/hatch-socialmedia/",
+        "https://chat.whatsapp.com/JTgEUguIZje8CcfgIpC4KZ"
+      ],
+      "founder": {
+        "@type": "Person",
+        "name": "Harshdeep Kaushal"
+      },
+      "employee": {
+        "@type": "Person",
+        "name": "Piyush Soni",
+        "jobTitle": "Chief Technology Officer"
+      },
+      "location": {
+        "@type": "Place",
+        "name": "Desai Sethi School of Entrepreneurship (DSSE), IIT Bombay",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "IIT Bombay, Powai",
+          "addressLocality": "Mumbai",
+          "addressRegion": "Maharashtra",
+          "postalCode": "400076",
+          "addressCountry": "IN"
+        }
+      },
+      "description": "Hatch is a student-led community backed by IIT Bombay’s IDEAS (DSSE) Program. We empower innovators and entrepreneurs through events, mentorship, and collaborative learning.",
+      "areaServed": "IN"
+    }
+    </script>
     <style>
       /* Canvas sits behind hero content */
 #paper {
